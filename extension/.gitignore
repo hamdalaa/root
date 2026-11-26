@@ -1,0 +1,2 @@
+# Private signing key behind the fixed Chromium extension ID; never commit it.
+*.pem

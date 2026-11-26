@@ -1,0 +1,81 @@
+{
+  "manifest_version": 3,
+  "name": "Root",
+  "short_name": "Root",
+  "version": "1.1.0",
+  "description": "Send videos, music, files and torrents from your browser to Root for Mac.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "Root",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "permissions": [
+    "nativeMessaging",
+    "contextMenus",
+    "downloads",
+    "cookies",
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting",
+    "webRequest",
+    "notifications",
+    "management"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "commands": {
+    "download-page": {
+      "suggested_key": { "default": "Alt+Shift+D", "mac": "Alt+Shift+D" },
+      "description": "Download the current page with Root"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; base-uri 'none'"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["compat.js", "catchrules.js", "linkcatch.js"],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "background_scripts": [
+    "compat.js",
+    "catchrules.js",
+    "host.js",
+    "settings.js",
+    "handoff.js",
+    "fallback.js",
+    "feedback.js",
+    "catcher.js",
+    "sniffer.js",
+    "menus.js",
+    "background.js"
+  ],
+  "chromium": {
+    "minimum_chrome_version": "116",
+    "background": { "service_worker": "sw.js" },
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyO+x4wmlcIMwmG3bHPUnrZ/JR+17A18PRrECJioR80uMFX0ZOSSt2IoIu+u0vNNF/b6LxnN86rJsf9VnqOBpuX+NiOZ4+bYHDK+qq7Eikll5s5bW5Z0u76GzL3gx97vrnbs6E9SlBIzaHEv9ogIyZUUBrSpJ6T2jmekPQjz6fwkOWIuMWLIwwEYiAV0F9R8e0d6r9JusqbErdFWxOPYmnDxOx1oU89KtLrQLM77eymmWo4JaKRrSlvt9AFP1iK/KryrWU+UUrJOTL41kFSpP6mRaCUSa1gz6kq8vBn5ax0swtkK8QWkEgTI+Ay7ulkA5KrQIoyLvB+tRwBGNpuWSkQIDAQAB"
+  },
+  "firefox": {
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "parabolic@hamad.dev",
+        "strict_min_version": "142.0",
+        "data_collection_permissions": { "required": ["none"] }
+      }
+    }
+  }
+}
